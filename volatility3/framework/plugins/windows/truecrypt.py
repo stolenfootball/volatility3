@@ -78,9 +78,10 @@ class Passphrase(interfaces.plugins.PluginInterface):
         int32 = ObjectTemplate(
             Integer, pe_table_name + constants.BANG + "int", data_format=format
         )
-        count, not_aligned = divmod(size, DWORD_SIZE_BYTES)
-        if not_aligned:
-            raise ValueError("PE data section not DWORD-aligned!")
+        # count, not_aligned = divmod(size, DWORD_SIZE_BYTES)
+        # if not_aligned:
+        #     raise ValueError("PE data section not DWORD-aligned!")
+        count = size // DWORD_SIZE_BYTES
         lengths = self.context.object(
             pe_table_name + constants.BANG + "array",
             layer_name,
